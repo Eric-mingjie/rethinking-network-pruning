@@ -6,7 +6,7 @@ from torch.autograd import Variable
 
 
 __all__ = [
-    'vgg_5x', 'vgg16_official',
+    'vgg_5x', 'vgg_official',
 ]
 
 model_urls = {
