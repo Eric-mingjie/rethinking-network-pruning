@@ -1,3 +1,4 @@
+# Code from https://github.com/simochen/model-tools.
 import numpy as np
 
 import torch
