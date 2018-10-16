@@ -5,7 +5,7 @@ This repository contains the code for reproducing the results, and trained Image
 
 [Zhuang Liu](https://liuzhuang13.github.io/)\*, Mingjie Sun\*, [Tinghui Zhou](https://people.eecs.berkeley.edu/~tinghuiz/), [Gao Huang](http://www.gaohuang.net/), [Trevor Darrell](https://people.eecs.berkeley.edu/~trevor/) (\* equal contribution).
 
-This paper shows that training the small pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning procedure". Our results suggest:  
+This paper shows that training the small pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning" procedure. Our results suggest:  
 
 1. Training a large, over-parameterized model is not necessary to obtain an efficient final model. 
 2. Learned "important" weights of the large model are not necessarily useful for the small pruned model. 
