@@ -34,6 +34,8 @@ We evaluated the following six pruning methods:
 
 For CIFAR, our code is based on [pytorch-classification](https://github.com/bearpaw/pytorch-classification) and [network-slimming](https://github.com/Eric-mingjie/network-slimming). For ImageNet, we use the [official Pytorch ImageNet training code](https://github.com/pytorch/examples/blob/0.3.1/imagenet/main.py). The instructions and models are in each subfolder.
 
+Our experiment environment is Python 3.6 & PyTorch 0.3.1.
+
 ## Contact
 sunmj15 at gmail.com  
 liuzhuangthu at gmail.com
