@@ -12,7 +12,7 @@ python main.py --arch vgg11_bn --s 0.00001 --save [PATH TO SAVE RESULTS] [IMAGEN
 
 ## Prune
 ```
-python prune.py --arch vgg11_bn --percent 0.5 --model [PATH TO THE BASE MODEL] --save [PATH TO SAVE RESULTS] [IMAGENET]
+python prune.py --percent 0.5 --model [PATH TO THE BASE MODEL] --save [PATH TO SAVE RESULTS] [IMAGENET]
 ```
 
 ## Finetune
