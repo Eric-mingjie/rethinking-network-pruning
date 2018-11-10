@@ -14,7 +14,7 @@ model_urls = {
     'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
 }
 
-with open("filter.pkl",'rb') as f:
+with open("models/filter.pkl",'rb') as f:
     filter_index = pickle.load(f)
 
 def conv3x3(in_planes, out_planes, stride=1):
