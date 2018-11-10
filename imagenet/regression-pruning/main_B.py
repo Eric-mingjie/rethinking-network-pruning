@@ -17,12 +17,13 @@ import torchvision.datasets as datasets
 import torchvision.models as models
 
 from compute_flops import count_model_param_flops
-import models
-
 
 model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
     and callable(models.__dict__[name]))
+
+import models
+
 
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 parser.add_argument('data', metavar='DIR',
