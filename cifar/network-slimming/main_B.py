@@ -99,12 +99,7 @@ else:
                        ])),
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
 
-if args.refine:
-    checkpoint = torch.load(args.refine)
-    model = models.__dict__[args.arch](dataset=args.dataset, depth=args.depth, cfg=checkpoint['cfg'])
-    model.load_state_dict(checkpoint['state_dict'])
-else:
-    model = models.__dict__[args.arch](dataset=args.dataset, depth=args.depth)
+model = models.__dict__[args.arch](dataset=args.dataset, depth=args.depth)
 
 if args.scratch:
     checkpoint = torch.load(args.scratch)
