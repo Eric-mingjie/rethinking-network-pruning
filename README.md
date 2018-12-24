@@ -1,12 +1,11 @@
 # Rethinking the Value of Network Pruning
-This repository contains the code for reproducing the results, and trained ImageNet models, in the following arXiv paper:  
+This repository contains the code for reproducing the results, and trained ImageNet models, in the following paper:  
 
 [Rethinking the Value of Network Pruning](https://openreview.net/pdf?id=rJlnB3C5Ym) 
 
 [Zhuang Liu](https://liuzhuang13.github.io/)\*, Mingjie Sun\*, [Tinghui Zhou](https://people.eecs.berkeley.edu/~tinghuiz/), [Gao Huang](http://www.gaohuang.net/), [Trevor Darrell](https://people.eecs.berkeley.edu/~trevor/) (\* equal contribution).
 
-To appear on ICLR 2019.
-Also [Best Paper Award](https://nips.cc/Conferences/2018/Schedule?showEvent=10941) at NIPS 2018 Workshop on Compact Deep Neural Networks with industrial applications.
+ICLR 2019. Also [Best Paper Award](https://nips.cc/Conferences/2018/Schedule?showEvent=10941) at NIPS 2018 Workshop on Compact Deep Neural Networks with industrial applications.
 
 This paper shows that training the small pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning" procedure. Our results suggest:  
 
