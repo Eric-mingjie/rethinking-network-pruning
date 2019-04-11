@@ -49,6 +49,6 @@ Network|Prune ratio|Training method|Top-1|Top-5|Download
 ResNet-50|30%|finetune| 76.06| 92.88| [pytorch model (195 MB)](https://drive.google.com/open?id=17bzfWtHjTkCture96d7MG0afrFiY9xFF)
 ResNet-50|30%|scratch-E| 74.77| 92.19| [pytorch model (195 MB)](https://drive.google.com/open?id=1C3VxBlWbOwjtvlFe_5cRZpFFY0H4NJRp)
 ResNet-50|30%|scratch-B| 75.60| 92.75| [pytorch model (195 MB)](https://drive.google.com/open?id=1z3ABz6Pk0drVueWJRucG68MeGnAyA6t7)
-ResNet-50|60%|finetune| 76.09| 92.91| [pytorch model (195 MB)](https://drive.google.com/open?id=1LYyCHVypbkkS23RVOgcE8clUs3haRlHA)
+ResNet-50|60%|finetune| 76.09| 92.91| [pytorch model (195 MB)](https://drive.google.com/open?id=1iTwXpW61OodacsefyuSDljtGPj0FxvUY)
 ResNet-50|60%|scratch-E| 73.69| 91.61| [pytorch model (195 MB)](https://drive.google.com/open?id=1LYyCHVypbkkS23RVOgcE8clUs3haRlHA)
 ResNet-50|60%|scratch-B| 74.90| 92.28| [pytorch model (195 MB)](https://drive.google.com/open?id=17pqC05Sakt18xoRnpddAf-sYNs_vaKPk)
