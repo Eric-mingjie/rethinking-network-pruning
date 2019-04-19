@@ -3,7 +3,8 @@ This directory contains all the CIFAR experiments in the paper, where there are 
 
 1. [L1-norm based channel pruning](https://arxiv.org/abs/1608.08710)
 2. [Network Slimming](https://arxiv.org/abs/1708.06519)
-3. [Non-structured weight-level pruning](https://arxiv.org/abs/1506.02626)
+3. [Soft filter pruning](https://www.ijcai.org/proceedings/2018/0309.pdf)
+4. [Non-structured weight-level pruning](https://arxiv.org/abs/1506.02626)
 
 For each method, we give example commands for baseline training, finetuning, scratch-E training and scratch-B training.
 

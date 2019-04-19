@@ -1,6 +1,7 @@
 # Soft Filter Pruning for Accelerating Deep Convolutional Neural Networks
 
 This directory contains the pytorch implementation for [soft filter pruning](https://www.ijcai.org/proceedings/2018/0309.pdf) (IJCAI 2018).  
+Official implementation: [soft-filter-pruning](https://github.com/he-y/soft-filter-pruning).
 
 ## Dependencies
 - torch v0.3.1, torchvision v0.3.0
@@ -9,7 +10,7 @@ This directory contains the pytorch implementation for [soft filter pruning](htt
 Specify the path to dataset in `DATA`. The argument `--arch` can be [`resnet20`,`resnet32`,`resnet56`,`resnet110`].  
 Below shows the choice of the argument `--layer_end` over different architectures:  
 `resnet20`: 54  `resnet32`: 90 `resnet56`: 162 `resnet110`:324  
-The hyperparameter settings are the same as that in the original paper.
+The hyperparameter settings are the same as those in the original paper.
 
 ## Baseline 
 ```shell
