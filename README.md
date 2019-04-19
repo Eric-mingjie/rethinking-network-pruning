@@ -25,7 +25,7 @@ This paper shows that training the small pruned model from scratch can almost al
 ```
 
 ## Implementation
-We evaluated the following six pruning methods:  
+We evaluated the following seven pruning methods:  
 
 1. [L1-norm based channel pruning](https://arxiv.org/abs/1608.08710)
 2. [ThiNet](https://arxiv.org/abs/1707.06342)
@@ -33,6 +33,7 @@ We evaluated the following six pruning methods:
 4. [Network Slimming](https://arxiv.org/abs/1708.06519)
 5. [Sparse Structure Selection](https://arxiv.org/abs/1707.01213)
 6. [Non-structured weight-level pruning](https://arxiv.org/abs/1506.02626)
+7. [Soft filter pruning](https://www.ijcai.org/proceedings/2018/0309.pdf)
 
 For CIFAR, our code is based on [pytorch-classification](https://github.com/bearpaw/pytorch-classification) and [network-slimming](https://github.com/Eric-mingjie/network-slimming). For ImageNet, we use the [official Pytorch ImageNet training code](https://github.com/pytorch/examples/blob/0.3.1/imagenet/main.py). The instructions and models are in each subfolder.
 
