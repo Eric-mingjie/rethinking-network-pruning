@@ -1,6 +1,6 @@
 # The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks
 
-This directory contains a pytorch implementation of [Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635) for non-structured weight pruning.
+This directory contains a pytorch implementation of [Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635) for non-structured weight pruning introduced in this [paper](https://arxiv.org/abs/1506.02626) (NIPS 2015).
 
 ## Dependencies
 torch v0.3.1, torchvision v0.2.0
@@ -8,7 +8,8 @@ torch v0.3.1, torchvision v0.2.0
 ## Baseline 
 
 ```shell
-python cifar.py --dataset cifar10 --arch vgg16_bn --depth 16 --lr 0.1 --save_dir [PATH TO SAVE THE MODEL]
+python cifar.py --dataset cifar10 --arch vgg16_bn --depth 16 \
+    --lr 0.1 --save_dir [PATH TO SAVE THE MODEL]
 ```
 Note that the initialization is stored in a file called `init.pth.tar`, which will be used when training the lottery ticket.
 
