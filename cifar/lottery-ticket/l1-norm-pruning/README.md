@@ -35,7 +35,7 @@ python main_lottery.py --dataset cifar10 --arch vgg --depth 16 \
 
 ## Scratch-E
 ```
-CUDA_VISIBLE_DEVICES=5 python main_scratch_mask.py --dataset cifar10 --arch vgg --depth 16 \
+python main_scratch_mask.py --dataset cifar10 --arch vgg --depth 16 \
     --lr 0.1 --resume [PATH TO THE PRUNED MODEL] \
     --save [PATH TO SAVE THE MODEL]
 ```
