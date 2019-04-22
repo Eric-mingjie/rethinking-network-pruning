@@ -1,7 +1,3 @@
-'''
-Training script for CIFAR-10/100
-Copyright (c) Wei YANG, 2017
-'''
 from __future__ import print_function
 
 import argparse
@@ -12,25 +8,13 @@ import random
 
 import torch
 import torch.nn as nn
-import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim as optim
 import torch.utils.data as data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
+
 import models.cifar as models
-
-import torch._utils
-try:
-    torch._utils._rebuild_tensor_v2
-except AttributeError:
-    def _rebuild_tensor_v2(storage, storage_offset, size, stride, requires_grad, backward_hooks):
-        tensor = torch._utils._rebuild_tensor(storage, storage_offset, size, stride)
-        tensor.requires_grad = requires_grad
-        tensor._backward_hooks = backward_hooks
-        return tensor
-    torch._utils._rebuild_tensor_v2 = _rebuild_tensor_v2
-
 
 from utils import Bar, Logger, AverageMeter, accuracy, mkdir_p, savefig
 
@@ -95,8 +79,6 @@ state = {k: v for k, v in args._get_kwargs()}
 # Validate dataset
 assert args.dataset == 'cifar10' or args.dataset == 'cifar100', 'Dataset can only be cifar10 or cifar100.'
 
-# Use CUDA
-# os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_id
 use_cuda = torch.cuda.is_available()
 
 # Random seed
@@ -176,6 +158,7 @@ def main():
         model = models.__dict__[args.arch](num_classes=num_classes)
 
     model.cuda()
+
     cudnn.benchmark = True
     print('    Total params: %.2fM' % (sum(p.numel() for p in model.parameters())/1000000.0))
 
@@ -195,14 +178,11 @@ def main():
         logger = Logger(os.path.join(args.save_dir, 'log.txt'), title=title)
         logger.set_names(['Learning Rate', 'Train Loss', 'Valid Loss', 'Train Acc.', 'Valid Acc.'])
 
-    model = torch.nn.DataParallel(model).cuda()
-
-
     print('\nEvaluation only')
     test_loss0, test_acc0 = test(testloader, model, criterion, start_epoch, use_cuda)
     print('Before pruning: Test Loss:  %.8f, Test Acc:  %.2f' % (test_loss0, test_acc0))
 
-# -------------------------------------------------------------
+    # -------------------------------------------------------------
     #pruning 
     total = 0
     total_nonzero = 0
@@ -238,7 +218,7 @@ def main():
             print('layer index: {:d} \t total params: {:d} \t remaining params: {:d}'.
                 format(k, mask.numel(), int(torch.sum(mask))))
     print('Total conv params: {}, Pruned conv params: {}, Pruned ratio: {}'.format(total, pruned, pruned/total))
-# -------------------------------------------------------------
+    # -------------------------------------------------------------
 
     print('\nTesting')
     test_loss1, test_acc1 = test(testloader, model, criterion, start_epoch, use_cuda)

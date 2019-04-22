@@ -1,26 +1,20 @@
-'''
-Training script for CIFAR-10/100
-Copyright (c) Wei YANG, 2017
-'''
 from __future__ import print_function
 
 import argparse
 import os
+import random
 import shutil
 import time
-import random
 
 import torch
 import torch.nn as nn
-import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim as optim
 import torch.utils.data as data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
-import models.cifar as models
-import pdb
 
+import models.cifar as models
 
 from utils import Bar, Logger, AverageMeter, accuracy, mkdir_p, savefig
 
@@ -55,8 +49,6 @@ parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
 parser.add_argument('--weight-decay', '--wd', default=1e-4, type=float,
                     metavar='W', help='weight decay (default: 1e-4)')
 # Checkpoints
-# parser.add_argument('-c', '--checkpoint', default='checkpoint', type=str, metavar='PATH',
-#                     help='path to save checkpoint (default: checkpoint)')
 parser.add_argument('--resume', default='', type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
 # Architecture
@@ -86,8 +78,6 @@ state = {k: v for k, v in args._get_kwargs()}
 # Validate dataset
 assert args.dataset == 'cifar10' or args.dataset == 'cifar100', 'Dataset can only be cifar10 or cifar100.'
 
-# Use CUDA
-# os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_id
 use_cuda = torch.cuda.is_available()
 
 # Random seed
@@ -104,9 +94,6 @@ def main():
     global best_acc
     start_epoch = args.start_epoch  # start from epoch 0 or last checkpoint epoch
 
-    # if not os.path.isdir(args.checkpoint):
-        # mkdir_p(args.checkpoint)
-    
     os.makedirs(args.save_dir, exist_ok=True)
 
     # Data
@@ -168,14 +155,13 @@ def main():
     else:
         model = models.__dict__[args.arch](num_classes=num_classes)
 
-    model = torch.nn.DataParallel(model).cuda()
     model.cuda()
+
     cudnn.benchmark = True
     print('    Total params: %.2fM' % (sum(p.numel() for p in model.parameters())/1000000.0))
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
-    # optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
     # Resume
     title = 'cifar-10-' + args.arch
@@ -194,10 +180,6 @@ def main():
         logger = Logger(os.path.join(args.save_dir, 'log.txt'), title=title)
         logger.set_names(['Learning Rate', 'Train Loss', 'Valid Loss', 'Train Acc.', 'Valid Acc.'])
 
-    # model = torch.nn.DataParallel(model).cuda()
-    # log = []
-    # np.savetxt(os.path.join(args.save_dir, 'log.txt'), log)
-
     if args.evaluate:
         print('\nEvaluation only')
         test_loss, test_acc = test(testloader, model, criterion, start_epoch, use_cuda)
@@ -215,9 +197,6 @@ def main():
         train_loss, train_acc = train(trainloader, model, criterion, optimizer, epoch, use_cuda)
         test_loss, test_acc = test(testloader, model, criterion, epoch, use_cuda)
 
-        # log.append([train_loss, test_loss, train_acc, test_acc])
-
-
         # append logger file
         logger.append([state['lr'], train_loss, test_loss, train_acc, test_acc])
 
@@ -232,13 +211,7 @@ def main():
                 'optimizer' : optimizer.state_dict(),
             }, is_best, checkpoint=args.save_dir)
 
-        # if epoch in [10, 20, 30, 40]:
-        # if epoch == 0:
-        #     save_checkpoint({'state_dict':model.state_dict()}, False, checkpoint=args.save_dir, filename='epoch_%d.pth.tar'%epoch)
-
     logger.close()
-    # logger.plot()
-    # savefig(os.path.join(args.save_dir, 'log.eps'))
 
     print('Best acc:')
     print(best_acc)
@@ -267,14 +240,6 @@ def train(trainloader, model, criterion, optimizer, epoch, use_cuda):
         # compute output
         outputs = model(inputs)
         loss = criterion(outputs, targets)
-        # loss_act = 0
-        # pdb.set_trace()
-
-        # if args.act_decay > 0:
-        # loss_act = 
-
-        # loss = loss + torch.abs(feature).sum() * args.act_decay
-        # loss = loss + feature.pow(2).sum() * 0.0001
 
         # measure accuracy and record loss
         prec1, prec5 = accuracy(outputs.data, targets.data, topk=(1, 5))

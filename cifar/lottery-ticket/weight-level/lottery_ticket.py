@@ -1,38 +1,21 @@
-'''
-Training script for CIFAR-10/100
-Copyright (c) Wei YANG, 2017
-'''
 from __future__ import print_function
 
 import argparse
+import math
 import os
+import random
 import shutil
 import time
-import random
-import math
 
 import torch
 import torch.nn as nn
-import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim as optim
 import torch.utils.data as data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
+
 import models.cifar as models
-
-from count_flops import count_model_param_flops
-
-import torch._utils
-try:
-    torch._utils._rebuild_tensor_v2
-except AttributeError:
-    def _rebuild_tensor_v2(storage, storage_offset, size, stride, requires_grad, backward_hooks):
-        tensor = torch._utils._rebuild_tensor(storage, storage_offset, size, stride)
-        tensor.requires_grad = requires_grad
-        tensor._backward_hooks = backward_hooks
-        return tensor
-    torch._utils._rebuild_tensor_v2 = _rebuild_tensor_v2
 
 from utils import Bar, Logger, AverageMeter, accuracy, mkdir_p, savefig
 from utils.misc import get_conv_zero_param
@@ -202,9 +185,8 @@ def main():
         model = models.__dict__[args.arch](num_classes=num_classes)
         model_ref = models.__dict__[args.arch](num_classes=num_classes)
 
-    model = torch.nn.DataParallel(model).cuda()
-    model_ref = torch.nn.DataParallel(model_ref).cuda()
-
+    model.cuda()
+    model_ref.cuda()
 
     cudnn.benchmark = True
     print('    Total params: %.2fM' % (sum(p.numel() for p in model.parameters())/1000000.0))
@@ -222,17 +204,8 @@ def main():
         checkpoint = torch.load(args.resume)
         best_acc = checkpoint['best_acc']
         start_epoch = args.start_epoch
-        try:
-            model_ref.load_state_dict(checkpoint['state_dict'])
-        except:
-            model_ref = model_ref.module
-            model_ref.load_state_dict(checkpoint['state_dict'])
-            model_ref = torch.nn.DataParallel(model_ref).cuda()
+        model_ref.load_state_dict(checkpoint['state_dict'])
 
-    model.cuda()
-    model_ref.cuda()
-
-    # else:
     logger = Logger(os.path.join(args.save_dir, 'log_scratch.txt'), title=title)
     logger.set_names(['Learning Rate', 'Train Loss', 'Valid Loss', 'Train Acc.', 'Valid Acc.'])
 
@@ -240,12 +213,7 @@ def main():
     if args.model:
         print('==> Loading init model from %s'%args.model)
         checkpoint = torch.load(args.model)
-        try:
-            model.load_state_dict(checkpoint['state_dict'])
-        except:
-            model = model.module
-            model.load_state_dict(checkpoint['state_dict'])
-            model = torch.nn.DataParallel(model).cuda()
+        model.load_state_dict(checkpoint['state_dict'])
 
     for m, m_ref in zip(model.modules(), model_ref.modules()):
         if isinstance(m, nn.Conv2d):
@@ -406,8 +374,6 @@ def test(testloader, model, criterion, epoch, use_cuda):
 def save_checkpoint(state, is_best, checkpoint, filename='scratch.pth.tar'):
     filepath = os.path.join(checkpoint, filename)
     torch.save(state, filepath)
-    # if is_best:
-        # shutil.copyfile(filepath, os.path.join(checkpoint, 'model_best.pth.tar'))
 
 def adjust_learning_rate(optimizer, epoch):
     global state

@@ -1,14 +1,15 @@
 from __future__ import division
 
-import os, sys, shutil, time, random
-import argparse
+import argparse, os, sys, shutil, time, random
+import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
 import torchvision.datasets as dset
 import torchvision.transforms as transforms
+
 from utils import AverageMeter, RecorderMeter, time_string, convert_secs2time
+
 import models
-import numpy as np
 
 
 model_names = sorted(name for name in models.__dict__

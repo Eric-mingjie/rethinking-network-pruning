@@ -1,18 +1,19 @@
 from __future__ import division
 
-import os, sys, shutil, time, random
-import argparse
+import argparse, math, os, sys, shutil, time, random
+import numpy as np
+
 import torch
 import torch.backends.cudnn as cudnn
 import torch.nn as nn
-import math
 import torchvision.datasets as dset
 import torchvision.transforms as transforms
+
 from utils import AverageMeter, RecorderMeter, time_string, convert_secs2time
+
 import models
-import numpy as np
+
 from compute_flops import count_model_param_flops
-from pdb import set_trace as st
 
 model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")

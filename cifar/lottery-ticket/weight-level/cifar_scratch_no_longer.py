@@ -1,38 +1,21 @@
-'''
-Training script for CIFAR-10/100
-Copyright (c) Wei YANG, 2017
-'''
 from __future__ import print_function
 
 import argparse
+import math
 import os
+import random
 import shutil
 import time
-import random
-import math
 
 import torch
 import torch.nn as nn
-import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim as optim
 import torch.utils.data as data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
+
 import models.cifar as models
-# import models.cifar_cross as models_cross
-from pdb import set_trace as st
-from count_flops import count_model_param_flops
-import torch._utils
-try:
-    torch._utils._rebuild_tensor_v2
-except AttributeError:
-    def _rebuild_tensor_v2(storage, storage_offset, size, stride, requires_grad, backward_hooks):
-        tensor = torch._utils._rebuild_tensor(storage, storage_offset, size, stride)
-        tensor.requires_grad = requires_grad
-        tensor._backward_hooks = backward_hooks
-        return tensor
-    torch._utils._rebuild_tensor_v2 = _rebuild_tensor_v2
 
 from utils import Bar, Logger, AverageMeter, accuracy, mkdir_p, savefig
 from utils.misc import get_conv_zero_param
@@ -68,8 +51,6 @@ parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
 parser.add_argument('--weight-decay', '--wd', default=1e-4, type=float,
                     metavar='W', help='weight decay (default: 1e-4)')
 # Checkpoints
-# parser.add_argument('-c', '--checkpoint', default='checkpoint', type=str, metavar='PATH',
-#                     help='path to save checkpoint (default: checkpoint)')
 parser.add_argument('--resume', default='', type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
 # Architecture
@@ -100,7 +81,6 @@ state = {k: v for k, v in args._get_kwargs()}
 assert args.dataset == 'cifar10' or args.dataset == 'cifar100', 'Dataset can only be cifar10 or cifar100.'
 
 # Use CUDA
-# os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_id
 use_cuda = torch.cuda.is_available()
 
 # Random seed
@@ -116,9 +96,6 @@ best_acc = 0  # best test accuracy
 def main():
     global best_acc
     start_epoch = args.start_epoch  # start from epoch 0 or last checkpoint epoch
-
-    # if not os.path.isdir(args.checkpoint):
-        # mkdir_p(args.checkpoint)
     
     os.makedirs(args.save_dir, exist_ok=True)
 
@@ -207,9 +184,8 @@ def main():
         model = models.__dict__[args.arch](num_classes=num_classes)
         model_ref = models.__dict__[args.arch](num_classes=num_classes)
 
-    #model = torch.nn.DataParallel(model).cuda()
-    # model_ref = torch.nn.DataParallel(model_ref).cuda()
-
+    model.cuda()
+    model_ref.cuda()
 
     cudnn.benchmark = True
     print('    Total params: %.2fM' % (sum(p.numel() for p in model.parameters())/1000000.0))
@@ -227,26 +203,8 @@ def main():
         checkpoint = torch.load(args.resume)
         best_acc = checkpoint['best_acc']
         start_epoch = args.start_epoch
-        try:
-            model_ref.load_state_dict(checkpoint['state_dict'])
-        except:
-            model_ref = torch.nn.DataParallel(model_ref).cuda()
-            model_ref.load_state_dict(checkpoint['state_dict'])
-            model_ref = model_ref.module
+        model_ref.load_state_dict(checkpoint['state_dict'])
 
-    model.cuda()
-    model_ref.cuda()
-
-    # total_nonzero = 0
-    # total = 0
-    # for m in model_ref.modules():
-    #     if isinstance(m, nn.Conv2d):
-    #         mask = m.weight.data.abs().clone().gt(0).float().cuda()
-    #         total_nonzero += torch.sum(mask)
-    #         total += m.weight.data.numel()
-    # print("Number of nonzero %d ratio %f"%(total_nonzero, total_nonzero / total))
-
-    # else:
     logger = Logger(os.path.join(args.save_dir, 'log_scratch.txt'), title=title)
     logger.set_names(['Learning Rate', 'Train Loss', 'Valid Loss', 'Train Acc.', 'Valid Acc.'])
 
@@ -258,18 +216,6 @@ def main():
             n = mask.sum() / float(m.in_channels)
             m.weight.data.normal_(0, math.sqrt(2. / n))
             m.weight.data.mul_(mask)
-
-    model = torch.nn.DataParallel(model).cuda()
-    model_ref = torch.nn.DataParallel(model_ref).cuda()
-    # ----------------------------------------------------------------------------------
-    # # New initialization
-    # for m in model.modules():
-    #     if isinstance(m, nn.Conv2d):
-    #         weight_copy = m.weight.data.abs().clone()
-    #         num_nonzero = weight_copy.gt(0).float().sum()
-    #         n = num_nonzero / float(m.in_channels)
-    #         m.weight.data.normal_(0, math.sqrt(2. / n))
-    # #------------------------------------------------------------------------------------
 
     # Train and val
     for epoch in range(start_epoch, args.epochs):
@@ -299,8 +245,6 @@ def main():
             }, is_best, checkpoint=args.save_dir)
 
     logger.close()
-    # logger.plot()
-    # savefig(os.path.join(args.save_dir, 'log.eps'))
 
     print('Best acc:')
     print(best_acc)
@@ -349,7 +293,6 @@ def train(trainloader, model, criterion, optimizer, epoch, use_cuda):
                 mask = weight_copy.gt(0).float().cuda()
                 m.weight.grad.data.mul_(mask)
         optimizer.step()
-
 
         # measure elapsed time
         batch_time.update(time.time() - end)
@@ -426,8 +369,6 @@ def test(testloader, model, criterion, epoch, use_cuda):
 def save_checkpoint(state, is_best, checkpoint, filename='scratch.pth.tar'):
     filepath = os.path.join(checkpoint, filename)
     torch.save(state, filepath)
-    # if is_best:
-        # shutil.copyfile(filepath, os.path.join(checkpoint, 'model_best.pth.tar'))
 
 def adjust_learning_rate(optimizer, epoch):
     global state
