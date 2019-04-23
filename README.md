@@ -19,6 +19,8 @@ Our paper shows that for structured pruning, training the small pruned model fro
 
 Our results suggest the need for more careful baseline evaluations in future research on structured pruning methods. 
 
+We also compare with the "[Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635)" (Frankle & Carbin 2019), and find that with optimal learning rate, the "winning ticket" initialization as used in Frankle & Carbin (2019) does not bring improvement over random initialization. For more details please refer to our paper.
+
 ## Implementation
 We evaluated the following seven pruning methods. 
 
@@ -31,6 +33,8 @@ We evaluated the following seven pruning methods.
 7. [Unstructured weight-level pruning](https://arxiv.org/abs/1506.02626)
 
 The first six is structured while the last one is unstructured (or sparse). For CIFAR, our code is based on [pytorch-classification](https://github.com/bearpaw/pytorch-classification) and [network-slimming](https://github.com/Eric-mingjie/network-slimming). For ImageNet, we use the [official Pytorch ImageNet training code](https://github.com/pytorch/examples/blob/0.3.1/imagenet/main.py). The instructions and models are in each subfolder.
+
+For experiments on [The Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635), please refer to the folder cifar/lottery-ticket.
 
 Our experiment environment is Python 3.6 & PyTorch 0.3.1. 
 
