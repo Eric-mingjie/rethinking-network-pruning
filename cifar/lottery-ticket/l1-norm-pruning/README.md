@@ -1,12 +1,12 @@
 # The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks
 
-This directory contains a pytorch implementation of [Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635) for non-structured weight pruning introduced in this [paper](https://arxiv.org/abs/1506.02626) (NIPS 2015).
+This directory contains a pytorch implementation of [Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635) for l1-norm based filter pruning introduced in this [paper](https://arxiv.org/abs/1608.08710) (ICLR 2017).
 
 ## Dependencies
 torch v0.3.1, torchvision v0.2.0
 
 ## Overview
-Since lottery ticket hypothesis involves the initialization of baseline model before training, it is more easy to implement it using mask implementation (More explanation [here](https://github.com/Eric-mingjie/network-slimming/tree/master/mask-impl#mask-implementation-of-network-slimming)). 
+Since lottery ticket hypothesis involves the initialization of baseline model before training, it is easier to implement it using mask implementation (More explanation [here](https://github.com/Eric-mingjie/network-slimming/tree/master/mask-impl#mask-implementation-of-network-slimming)). 
 
 ## Baseline 
 
