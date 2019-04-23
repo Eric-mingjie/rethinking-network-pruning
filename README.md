@@ -40,6 +40,7 @@ Our experiment environment is Python 3.6 & PyTorch 0.3.1.
 
 ## Contact
 Feel free to discuss papers/code with us through issues/emails!
+
 sunmj15 at gmail.com  
 liuzhuangthu at gmail.com
 
