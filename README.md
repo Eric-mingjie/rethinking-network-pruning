@@ -7,7 +7,7 @@ Rethinking the Value of Network Pruning. [[arXiv]](https://arxiv.org/abs/1810.05
 
 ICLR 2019. Also [Best Paper Award](https://nips.cc/Conferences/2018/Schedule?showEvent=10941) at NIPS 2018 Workshop on Compact Deep Neural Networks.
 
-This repo contains several pruning methods' implementations that can be reused.
+Several pruning methods' implementations contained in this repo can also be readily used for other research purposes.
 
 ## Paper Summary
 
