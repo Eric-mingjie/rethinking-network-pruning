@@ -1,7 +1,7 @@
 # Rethinking the Value of Network Pruning
 This repository contains the code for reproducing the results, and trained ImageNet models, in the following paper:  
 
-Rethinking the Value of Network Pruning. [arXiv](https://arxiv.org/abs/1810.05270) [OpenReview](https://openreview.net/forum?id=rJlnB3C5Ym)
+Rethinking the Value of Network Pruning. [[arXiv]](https://arxiv.org/abs/1810.05270),[[OpenReview]](https://openreview.net/forum?id=rJlnB3C5Ym)
 
 [Zhuang Liu](https://liuzhuang13.github.io/)\*, Mingjie Sun\*, [Tinghui Zhou](https://people.eecs.berkeley.edu/~tinghuiz/), [Gao Huang](http://www.gaohuang.net/), [Trevor Darrell](https://people.eecs.berkeley.edu/~trevor/) (\* equal contribution).
 
