@@ -7,11 +7,13 @@ This repository contains the code for reproducing the results, and trained Image
 
 ICLR 2019. Also [Best Paper Award](https://nips.cc/Conferences/2018/Schedule?showEvent=10941) at NIPS 2018 Workshop on Compact Deep Neural Networks.
 
-This paper shows that training the small pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning" procedure. Our results suggest:  
+Our paper shows that for structured pruning, training the small pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning" procedure. For those pruning methods:
 
 1. Training a large, over-parameterized model is not absolutely necessary to obtain an efficient final model.
 2. Learned “important” weights of the large model are typically not useful for the small pruned model. 
-3. The pruned architecture itself, rather than a set of inherited “important” weights, is more crucial to the efficiency in the final model, which suggests that in some cases pruning can be useful as an architecture search paradigm. Our results suggest the need for more careful baseline evaluations in future research on structured pruning methods. We also compare with the "Lottery Ticket Hypothesis" (Frankle & Carbin 2019), and find that with optimal learning rate, the "winning ticket" initialization as used in Frankle & Carbin (2019) does not bring improvement over random initialization.
+3. The pruned architecture itself, rather than a set of inherited “important” weights, is more crucial to the efficiency in the final model, which suggests that in some cases pruning can be useful as an architecture search paradigm. 
+
+Our results suggest the need for more careful baseline evaluations in future research on structured pruning methods. 
 
 ## Citation
 
