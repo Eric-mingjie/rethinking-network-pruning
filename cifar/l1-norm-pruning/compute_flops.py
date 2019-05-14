@@ -108,6 +108,6 @@ def print_model_param_flops(model=None, input_res=224, multiply_adds=True):
 
     total_flops = (sum(list_conv) + sum(list_linear) + sum(list_bn) + sum(list_relu) + sum(list_pooling) + sum(list_upsample))
 
-    print('  + Number of FLOPs: %.5fG' % (total_flops / 3 / 1e9))
+    print('  + Number of FLOPs: %.5fG' % (total_flops / 1e9))
     
     return total_flops
