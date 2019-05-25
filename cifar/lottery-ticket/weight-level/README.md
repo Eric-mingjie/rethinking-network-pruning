@@ -18,7 +18,7 @@ Note that the initialization is stored in a file called `init.pth.tar`, which wi
 ```shell
 python cifar_prune_iterative.py --dataset cifar10 --arch vgg16_bn --depth 16 \
     --percent RATIO --resume [PATH TO THE MODEL TO BE PRUNED] \
-    --save_DIR [PATH TO SAVE THE PRUNED MODEL]
+    --save_dir [PATH TO SAVE THE PRUNED MODEL]
 ```
 Note that `cifar_prune_iterative` is implemented as pruning all the nonzero element in the model and the ratio in `--percent` refers to the prune ratio respect to the total number of nonzero element. When a model is iteratively pruned, you just need to pass the model to be pruned each iteration to `--resume` and set the ratio to be the prune ratio respectively.
 
