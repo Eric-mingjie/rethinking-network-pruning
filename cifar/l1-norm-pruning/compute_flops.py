@@ -110,4 +110,4 @@ def print_model_param_flops(model=None, input_res=224, multiply_adds=True):
 
     print('  + Number of FLOPs: %.5fG' % (total_flops / 3 / 1e9))
     
-    return total_flops
+    return total_flops / 3
