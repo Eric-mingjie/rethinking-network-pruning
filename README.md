@@ -45,6 +45,7 @@ sunmj15 at gmail.com
 liuzhuangthu at gmail.com
 
 ## Citation
+If you use our code in your research, please cite:
 ```
 @inproceedings{liu2018rethinking,
   title={Rethinking the Value of Network Pruning},
