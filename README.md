@@ -12,11 +12,12 @@ Several pruning methods' implementations contained in this repo can also be read
 ## Paper Summary
 
 <div align=center>
-<img src="https://user-images.githubusercontent.com/8370623/67258108-e98f9c80-f443-11e9-9146-9a8333c6f318.png" width="400">
+<img src="https://user-images.githubusercontent.com/8370623/67258108-e98f9c80-f443-11e9-9146-9a8333c6f318.png" width="320">
 </div>
-
+<div align=center>
 Fig 1: A typical three-stage network pruning
 pipeline.
+</div>
 
 Our paper shows that for **structured** pruning, **training the pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning" (Fig. 1) procedure**. We conclude that for those pruning methods:
 
