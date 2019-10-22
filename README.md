@@ -11,13 +11,28 @@ Several pruning methods' implementations contained in this repo can also be read
 
 ## Paper Summary
 
-Our paper shows that for structured pruning, training the small pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning" procedure. For those pruning methods:
+<div align=center>
+<img src="https://user-images.githubusercontent.com/8370623/67258108-e98f9c80-f443-11e9-9146-9a8333c6f318.png" width="400">
+</div>
 
-1. Training a large, over-parameterized model is not absolutely necessary to obtain an efficient final model.
+Fig 1: A typical three-stage network pruning
+pipeline.
+
+Our paper shows that for **structured** pruning, **training the pruned model from scratch can almost always achieve comparable or higher level of accuracy than the model obtained from the typical "training, pruning and fine-tuning" (Fig. 1) procedure**. We conclude that for those pruning methods:
+
+1. Training a large, over-parameterized model is often not necessary to obtain an efficient final model.
 2. Learned “important” weights of the large model are typically not useful for the small pruned model. 
 3. The pruned architecture itself, rather than a set of inherited “important” weights, is more crucial to the efficiency in the final model, which suggests that in some cases pruning can be useful as an architecture search paradigm. 
 
 Our results suggest the need for more careful baseline evaluations in future research on structured pruning methods. 
+
+<div align=center>
+<img src="https://user-images.githubusercontent.com/8370623/67257959-3b83f280-f443-11e9-8e4a-3afec30cff45.png" width="400">
+</div>
+
+Fig 2: Difference between predefined and automatically discovered target architectures, in channel pruning. The pruning ratio x is user-specified, while a, b, c, d are determined by the pruning algorithm. Unstructured sparse pruning can also be viewed as automatic. Our finding has different implications for predefined and automatic methods: for a predefined method, it is possible to skip the traditional "training, pruning and fine-tuning" pipeline and directly train the pruned model; for automatic methods, the pruning can be seen as a form of architecture learning.
+
+<br>
 
 We also compare with the "[Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635)" (Frankle & Carbin 2019), and find that with optimal learning rate, the "winning ticket" initialization as used in Frankle & Carbin (2019) does not bring improvement over random initialization. For more details please refer to our paper.
 
