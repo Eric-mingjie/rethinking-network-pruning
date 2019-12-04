@@ -3,7 +3,7 @@ This repository contains the code for reproducing the results, and trained Image
 
 Rethinking the Value of Network Pruning. [[arXiv]](https://arxiv.org/abs/1810.05270) [[OpenReview]](https://openreview.net/forum?id=rJlnB3C5Ym)
 
-[Zhuang Liu](https://liuzhuang13.github.io/)\*, Mingjie Sun\*, [Tinghui Zhou](https://people.eecs.berkeley.edu/~tinghuiz/), [Gao Huang](http://www.gaohuang.net/), [Trevor Darrell](https://people.eecs.berkeley.edu/~trevor/) (\* equal contribution).
+[Zhuang Liu](https://liuzhuang13.github.io/)\*, [Mingjie Sun](https://eric-mingjie.github.io/)\*, [Tinghui Zhou](https://people.eecs.berkeley.edu/~tinghuiz/), [Gao Huang](http://www.gaohuang.net/), [Trevor Darrell](https://people.eecs.berkeley.edu/~trevor/) (\* equal contribution).
 
 ICLR 2019. Also [Best Paper Award](https://nips.cc/Conferences/2018/Schedule?showEvent=10941) at NIPS 2018 Workshop on Compact Deep Neural Networks.
 
