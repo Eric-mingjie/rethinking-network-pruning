@@ -68,7 +68,7 @@ If you use our code in your research, please cite:
 ```
 @inproceedings{liu2018rethinking,
   title={Rethinking the Value of Network Pruning},
-  author={Zhuang Liu and Mingjie Sun and Tinghui Zhou and Gao Huang and Trevor Darrell},
+  author={Liu, Zhuang and Sun, Mingjie and Zhou, Tinghui and Huang, Gao and Darrell, Trevor},
   booktitle={ICLR},
   year={2019}
 }
