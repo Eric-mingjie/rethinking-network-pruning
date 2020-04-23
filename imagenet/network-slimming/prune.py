@@ -13,7 +13,7 @@ from vgg import slimmingvgg as vgg11
 
 
 # Prune settings
-parser = argparse.ArgumentParser(description='PyTorch Slimming CIFAR prune')
+parser = argparse.ArgumentParser(description='PyTorch Slimming Imagenet prune')
 parser.add_argument('--data', type=str, default='',
                     help='Path to imagenet validation data')
 parser.add_argument('--test-batch-size', type=int, default=16, metavar='N',
